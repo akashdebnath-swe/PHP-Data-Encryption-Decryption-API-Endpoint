@@ -5,17 +5,17 @@ A simple, flexible, and powerful PHP API endpoint designed to encrypt and decryp
 - **Data Encryption**: Encrypts any given string, array, or associative array into a Base64-encoded ciphertext ("hashcode string").
 - **Data Decryption**: Decrypts the Base64-encoded ciphertext back to its original data type.
 - **JSON Support**: Handles data serialization and deserialization using JSON, ensuring compatibility with various data structures.
-- **Secure Cipher**: Utilizes AES-256-CBC via PHP's openssl_encrypt and openssl_decrypt functions, suitable for PHP 5.6.40.
+- **Secure Cipher**: Utilizes `AES-256-CBC` via PHP's `openssl_encrypt` and `openssl_decrypt` functions, suitable for PHP 5.6.40.
 - **Error Handling**: Provides clear JSON responses for success and various error scenarios.
 
 ### 📋 Requirements
-- **PHP 5.6.40** (or a compatible version with openssl extension enabled)
+- **PHP 5.6.40** (or a compatible version with `openssl` extension enabled)
 - **OpenSSL Extension** for PHP
 
 ### ⚙️ Installation & Setup
-1. **Save the File**: Save the provided PHP code (e.g., api.php) to your web server's document root or a subfolder.
+1. **Save the File**: Save the provided PHP code (e.g., `api.php`) to your web server's document root or a subfolder.
 2. **Web Server Configuration**: Ensure your web server (Apache, Nginx, etc.) is configured to serve PHP files.
-3. **OpenSSL Extension**: Make sure the php_openssl extension is enabled in your php.ini file. You can usually find this line:
+3. **OpenSSL Extension**: Make sure the `php_openssl` extension is enabled in your `php.ini` file. You can usually find this line:
 
 ```
 extension=php_openssl.dll  ; for Windows
@@ -119,7 +119,7 @@ Using the `encrypted_data` from the string encryption example (`RmZadWwzK2o1c21Q
   2. **IV (Initialization Vector)**: For `AES-256-CBC`, a unique 16-byte (128-bit) IV should ideally be generated for each encryption. This IV does not need to be secret and can be safely transmitted alongside the ciphertext (e.g., prepended to the encrypted data). Using a fixed IV, as in the example, is less secure if the same key is reused multiple times.
 - **HTTPS**: Always use HTTPS for all API communication. This protects your data during transit from eavesdropping and tampering. Without HTTPS, even encrypted data can reveal patterns or be vulnerable to traffic analysis.
 - **Input Validation**: While the API handles data types, always perform robust input validation on the frontend and backend to prevent malicious data from being processed or injected.
-- **Error Logging**: The code includes error_log calls. Ensure your PHP error logging is properly configured to capture these messages for debugging and security monitoring.
+- **Error Logging**: The code includes `error_log` calls. Ensure your PHP error logging is properly configured to capture these messages for debugging and security monitoring.
 
 ### 🙏 Contributing
 Contributions are welcome! If you find a bug or have an idea for an improvement, please open an issue or submit a pull request.
