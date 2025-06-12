@@ -13,7 +13,7 @@ A simple, flexible, and powerful PHP API endpoint designed to encrypt and decryp
 - **OpenSSL Extension** for PHP
 
 ### ⚙️ Installation & Setup
-1. **Save the File**: Save the provided PHP code (e.g., `api.php`) to your web server's document root or a subfolder.
+1. **Save the File**: Save the provided PHP code (e.g., `secure.php`) to your web server's document root or a subfolder.
 2. **Web Server Configuration**: Ensure your web server (Apache, Nginx, etc.) is configured to serve PHP files.
 3. **OpenSSL Extension**: Make sure the `php_openssl` extension is enabled in your `php.ini` file. You can usually find this line:
 
@@ -27,7 +27,7 @@ Uncomment it if it's commented out, then restart your web server.
 The API is accessed via `POST` requests.
 
 **Encryption Endpoint**
-- **URL**: `http://yourdomain.com/path/to/api.php`
+- **URL**: `http://yourdomain.com/path/to/secure.php`
 - **Method**: `POST`
 - **Headers**: `Content-Type: application/json`
 - **Request Body (JSON)**:
@@ -88,7 +88,7 @@ The API is accessed via `POST` requests.
 }
 ```
 **Decryption Endpoint**
-- **URL**: `http://yourdomain.com/path/to/api.php`
+- **URL**: `http://yourdomain.com/path/to/secure.php`
 - **Method**: `POST`
 - **Headers**: `Content-Type: application/json`
 - **Request Body (JSON)**:
