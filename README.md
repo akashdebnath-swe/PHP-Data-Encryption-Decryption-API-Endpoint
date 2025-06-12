@@ -23,6 +23,16 @@ extension=openssl.so     ; for Linux/Unix
 ```
 Uncomment it if it's commented out, then restart your web server.
 
+### 🔑 Generate Base64-encoded AES-256 Key & Base64-encoded AES-128 Key using powershell
+`32` default for `AES-256`
+Change the value `32` to `16` for `AES-128`
+```
+$bytes = New-Object byte[] 32
+[System.Security.Cryptography.RNGCryptoServiceProvider]::Create().GetBytes($bytes)
+$keyBase64 = [Convert]::ToBase64String($bytes)
+Write-Output $keyBase64
+```
+
 ### 💡 Usage
 The API is accessed via `POST` requests.
 
