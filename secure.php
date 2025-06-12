@@ -35,9 +35,16 @@
 // IN PRODUCTION, GENERATE A STRONG, RANDOM KEY AND IV.
 // STORE THE KEY SECURELY (e.g., environment variables, KMS).
 // A fixed IV, while simpler, reduces security if reused with the same key.
-define('ENCRYPTION_KEY', 'a_very_strong_and_secret_key_of_32_bytes_for_aes256'); // 32 bytes = 256 bits for AES-256
-define('ENCRYPTION_IV', '1234567890123456'); // 16 bytes = 128 bits for AES-256-CBC
+
+$key = base64_decode('xOHme10EVl14TAKW8DbjVIobgaAhGnpF2fMvZpcGY88='); // Base64-encoded AES-256 Key
+$iv = base64_decode('xyZcnlqIdoZac/oX8G5XAQ=='); // Base64-encoded AES-128 Key
+
+define('ENCRYPTION_KEY', $key); // 32 bytes = 256 bits for AES-256
+define('ENCRYPTION_IV', $iv); // 16 bytes = 128 bits for AES-256-CBC
 define('CIPHER_ALGO', 'aes-256-cbc'); // Recommended cipher algorithm for PHP 5.6+
+
+// 32 bytes = 256 bits for AES-256
+$encryption_key = base64_decode(ENCRYPTION_KEY);
 
 // Set the content type header to JSON for all responses
 header('Content-Type: application/json');
@@ -139,6 +146,17 @@ function decrypt_data($encrypted_string_base64)
     return $data;
 }
 
+function getRandomBytes($length)
+{
+    if (function_exists('random_bytes')) {
+        return random_bytes($length);
+    } elseif (function_exists('openssl_random_pseudo_bytes')) {
+        return openssl_random_pseudo_bytes($length);
+    } else {
+        throw new Exception("No secure random function available");
+    }
+}
+
 // --- API Endpoint Logic ---
 
 // Check if the request method is POST. This API only supports POST requests.
@@ -155,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['status' => 'error', 'message' => 'Invalid JSON input.']);
         exit; // Terminate script execution
     }
+
 
     // --- Encryption Endpoint Logic ---
     // If the 'data' field is present in the request payload, perform encryption.
